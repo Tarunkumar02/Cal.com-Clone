@@ -168,5 +168,3 @@ The UI closely follows Cal.com's design with:
 - Clean, modern booking flow
 
 ---
-
-Built with ❤️ following the Single Source of Truth (SSOT) specification.
