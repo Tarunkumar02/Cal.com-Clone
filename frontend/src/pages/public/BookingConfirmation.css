@@ -1,0 +1,160 @@
+/* Booking Confirmation Styles - Exact Match */
+
+.confirmation-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: black;
+  /* Page background is black in screenshot */
+}
+
+.confirmation-card {
+  width: 100%;
+  max-width: 600px;
+  /* No background/border in screenshot? Actually looks centered on black bg. */
+  /* If it's a card, it's very subtle. Let's assume transparent or matching bg */
+  color: white;
+}
+
+.success-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.check-circle {
+  width: 56px;
+  height: 56px;
+  background: rgba(16, 185, 129, 0.2);
+  /* Green bg */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #10b981;
+  /* Green check */
+  margin-bottom: 24px;
+}
+
+.success-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.success-subtitle {
+  color: #9ca3af;
+  font-size: 15px;
+  max-width: 400px;
+  line-height: 1.5;
+}
+
+/* Details Grid */
+.details-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
+  padding: 32px 0;
+  margin-bottom: 32px;
+}
+
+.detail-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 16px;
+}
+
+.detail-label {
+  font-size: 15px;
+  font-weight: 500;
+  color: #ffffff;
+  /* Labels appear white in screenshot? Or grey? Image 4 shows "What" is white */
+}
+
+.detail-value {
+  font-size: 15px;
+  color: #d1d5db;
+  /* Slightly grey value? Image shows values are arguably lighter */
+  line-height: 1.5;
+}
+
+.who-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.participant {
+  display: flex;
+  flex-direction: column;
+}
+
+.badge-host {
+  display: inline-block;
+  background: #3b82f6;
+  color: white;
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.participant-email {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* Footer & Calendar */
+.action-footer {
+  text-align: center;
+  font-size: 14px;
+  color: #9ca3af;
+  margin-bottom: 40px;
+}
+
+.link-action {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.calendar-options {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.calendar-label {
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+.calendar-icons {
+  display: flex;
+  gap: 12px;
+}
+
+.cal-icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #1f2937;
+  border: 1px solid #374151;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.cal-icon-btn:hover {
+  background: #374151;
+}

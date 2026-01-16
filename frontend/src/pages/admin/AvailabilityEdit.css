@@ -1,0 +1,244 @@
+/* Availability Edit Styles - Exact Match */
+
+.availability-edit-page {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.edit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.back-btn {
+  padding: 8px;
+  border-radius: 50%;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-btn:hover {
+  background: var(--color-bg-tertiary);
+}
+
+.title-input {
+  font-size: 20px;
+  font-weight: 600;
+  background: transparent;
+  border: none;
+  color: var(--color-text-primary);
+}
+
+.title-input:focus {
+  outline: none;
+  text-decoration: underline;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.default-toggle-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 12px;
+}
+
+.default-toggle-wrapper .label {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+.separator {
+  width: 1px;
+  height: 24px;
+  background: var(--color-border);
+}
+
+.icon-btn-header {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 8px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  display: flex;
+}
+
+.icon-btn-header:hover {
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+}
+
+
+/* Content Grid */
+.edit-content-grid {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.schedule-config-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.day-row {
+  display: flex;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg-primary);
+}
+
+.day-row:last-child {
+  border-bottom: none;
+}
+
+.day-control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 160px;
+}
+
+.day-name {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.day-row:not(.active) .day-name {
+  color: var(--color-text-muted);
+}
+
+.time-range-inputs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.time-select {
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  padding: 6px 12px;
+  font-size: 14px;
+  width: 100px;
+}
+
+.icon-action {
+  background: transparent;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  padding: 4px;
+}
+
+.icon-action:hover {
+  color: var(--color-text-primary);
+}
+
+.unavailable-text {
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
+
+/* Sidebar Config */
+.sidebar-config {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.config-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.timezone-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.timezone-select {
+  background: transparent;
+  border: none;
+  color: var(--color-text-primary);
+  width: 100%;
+}
+
+.timezone-select:focus {
+  outline: none;
+}
+
+.troubleshoot-box {
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.troubleshoot-box p {
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.btn-outline {
+  width: 100%;
+  padding: 8px;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+/* Date Overrides */
+.date-overrides-section {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+
+.date-overrides-section h3 {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.date-overrides-section p {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 800px) {
+  .edit-content-grid {
+    grid-template-columns: 1fr;
+  }
+}

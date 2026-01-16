@@ -1,0 +1,177 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// Default admin user (no authentication required per SSOT)
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  timezone  String   @default("Asia/Kolkata")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  eventTypes            EventType[]
+  availabilitySchedules AvailabilitySchedule[]
+  bookings              Booking[]
+}
+
+// Event types with configurable duration, buffer, and settings
+model EventType {
+  id                 Int      @id @default(autoincrement())
+  userId             Int
+  title              String
+  description        String?  @db.Text
+  slug               String   @unique
+  duration           Int      // in minutes
+  bufferTimeBefore   Int      @default(0) // minutes before event
+  bufferTimeAfter    Int      @default(0) // minutes after event
+  isActive           Boolean  @default(true)
+  color              String   @default("#6366f1")
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  // Relations
+  user                 User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  availabilitySchedule AvailabilitySchedule? @relation(fields: [availabilityScheduleId], references: [id])
+  availabilityScheduleId Int?
+  bookingQuestions     BookingQuestion[]
+  bookings             Booking[]
+
+  @@index([userId])
+  @@index([slug])
+}
+
+// Named availability schedules (e.g., "Working Hours", "Weekend Only")
+model AvailabilitySchedule {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  name      String
+  timezone  String   @default("Asia/Kolkata")
+  isDefault Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  user              User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  availabilityRules AvailabilityRule[]
+  dateOverrides     DateOverride[]
+  eventTypes        EventType[]
+
+  @@index([userId])
+}
+
+// Weekly availability rules (day + time ranges)
+model AvailabilityRule {
+  id                   Int    @id @default(autoincrement())
+  availabilityScheduleId Int
+  dayOfWeek            Int    // 0 = Sunday, 1 = Monday, etc.
+  startTime            String // Format: "HH:mm" (24-hour)
+  endTime              String // Format: "HH:mm" (24-hour)
+
+  // Relations
+  availabilitySchedule AvailabilitySchedule @relation(fields: [availabilityScheduleId], references: [id], onDelete: Cascade)
+
+  @@index([availabilityScheduleId])
+}
+
+// Date-specific overrides (block dates or custom hours)
+model DateOverride {
+  id                   Int      @id @default(autoincrement())
+  availabilityScheduleId Int
+  date                 DateTime @db.Date
+  isBlocked            Boolean  @default(false) // If true, entire day is blocked
+  startTime            String?  // Custom start time (null if blocked)
+  endTime              String?  // Custom end time (null if blocked)
+  createdAt            DateTime @default(now())
+
+  // Relations
+  availabilitySchedule AvailabilitySchedule @relation(fields: [availabilityScheduleId], references: [id], onDelete: Cascade)
+
+  @@unique([availabilityScheduleId, date])
+  @@index([availabilityScheduleId])
+  @@index([date])
+}
+
+// Booking records with status tracking
+model Booking {
+  id              Int           @id @default(autoincrement())
+  eventTypeId     Int
+  userId          Int           // Admin user who owns the event
+  bookerName      String
+  bookerEmail     String
+  startTime       DateTime
+  endTime         DateTime
+  timezone        String
+  status          BookingStatus @default(CONFIRMED)
+  notes           String?       @db.Text
+  cancellationReason String?    @db.Text
+  rescheduledFromId Int?        // Reference to original booking if rescheduled
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  // Relations
+  eventType      EventType       @relation(fields: [eventTypeId], references: [id], onDelete: Cascade)
+  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bookingAnswers BookingAnswer[]
+
+  @@index([eventTypeId])
+  @@index([userId])
+  @@index([startTime])
+  @@index([status])
+}
+
+enum BookingStatus {
+  CONFIRMED
+  CANCELLED
+  RESCHEDULED
+}
+
+// Custom questions per event type
+model BookingQuestion {
+  id          Int          @id @default(autoincrement())
+  eventTypeId Int
+  question    String
+  type        QuestionType @default(TEXT)
+  isRequired  Boolean      @default(false)
+  options     String?      @db.Text // JSON array for SELECT/RADIO/CHECKBOX types
+  order       Int          @default(0)
+  createdAt   DateTime     @default(now())
+
+  // Relations
+  eventType      EventType       @relation(fields: [eventTypeId], references: [id], onDelete: Cascade)
+  bookingAnswers BookingAnswer[]
+
+  @@index([eventTypeId])
+}
+
+enum QuestionType {
+  TEXT
+  TEXTAREA
+  SELECT
+  RADIO
+  CHECKBOX
+}
+
+// Answers to booking questions
+model BookingAnswer {
+  id         Int    @id @default(autoincrement())
+  bookingId  Int
+  questionId Int
+  answer     String @db.Text
+
+  // Relations
+  booking  Booking         @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  question BookingQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([bookingId, questionId])
+  @@index([bookingId])
+}

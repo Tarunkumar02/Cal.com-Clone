@@ -1,0 +1,144 @@
+/* Availability List Styles - Cal.com Match */
+
+.availability-page {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+.btn-group {
+  display: flex;
+  background: var(--color-bg-secondary);
+  padding: 4px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
+
+.btn-group .btn {
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+
+.btn-group .btn.active {
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+  font-weight: 500;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Schedule List Item */
+.schedules-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.schedule-item-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  /* Padding moved to children or handled by layout */
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  transition: border-color 0.1s;
+  overflow: hidden;
+  /* Ensure link fills */
+}
+
+.schedule-content-link {
+  flex: 1;
+  text-decoration: none;
+  padding: 24px;
+  display: block;
+}
+
+.schedule-meta-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding-right: 24px;
+  /* Maintain padding on right */
+}
+
+.schedule-item-card:hover {
+  border-color: var(--color-text-secondary);
+}
+
+.schedule-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.schedule-header-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.schedule-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.badge-default {
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.schedule-summary {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+.schedule-meta-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.timezone-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+.btn-icon {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.btn-icon:hover {
+  background-color: var(--color-bg-tertiary);
+}
+
+.btn-delete:hover {
+  background-color: #fef2f2 !important;
+  color: #ef4444 !important;
+  border-color: #ef4444 !important;
+}
