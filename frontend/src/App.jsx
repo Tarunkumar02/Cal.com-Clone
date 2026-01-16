@@ -15,7 +15,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/* Public Routes */}
-        <Route path="/" element={<Navigate to="/profile" replace />} />
+        <Route path="/" element={<Navigate to="/admin/event-types" replace />} />
         <Route path="/profile" element={<PublicProfile />} />
         <Route path="/book/:slug" element={<BookingPage />} />
         <Route path="/booking/confirmation" element={<BookingConfirmation />} />
